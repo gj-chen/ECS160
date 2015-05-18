@@ -64,7 +64,7 @@ public class MyActivity extends ActionBarActivity {
     /* called when the user clicks the Enter button */
     public void sendMessage(View view) {
         Intent intent = new Intent(this, DisplayMessageActivity.class);
-        EditText editText = (EditText) findViewById(R.id.email);
+        EditText editText = (EditText) findViewById(R.id.username);
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);

@@ -54,7 +54,7 @@
             android:layout_weight="0.50"/>
     </LinearLayout>
 
-    <!-- email/password login-->
+    <!-- username/password login-->
     <LinearLayout
         android:id="@+id/screen3"
         android:layout_width="match_parent"
@@ -65,15 +65,15 @@
 
             <LinearLayout android:id="@+id/login_form" android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:orientation="vertical">
-                <!-- email form-->
-                <EditText android:id="@+id/email"
+                <!-- username form-->
+                <EditText android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:maxLines="1"
                     android:textColorHint="#d1d1e0"
                     android:textColor="#ffbbbcca"
-                    android:hint="@string/prompt_email"/>
+                    android:hint="@string/prompt_username"/>
                 <!-- password form-->
                 <EditText android:id="@+id/password"
                     android:layout_width="match_parent"
@@ -87,7 +87,7 @@
                 <Button
                     android:id="@+id/login_button"
                     style="?android:textAppearanceSmall"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/button_send"
                     android:textColor="#d1d1e0"

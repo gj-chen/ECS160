@@ -12,6 +12,13 @@ import android.widget.EditText;
 //import android.support.v7.widget.SearchView;
 import android.widget.SearchView;
 
+import java.sql.*;
+//will import all necessary java/sql libraries
+
+import android.app.Activity;
+import android.app.os.*;
+import android.widget.TextView;
+
 
 public class MyActivity extends ActionBarActivity {
     public final static String EXTRA_MESSAGE = "com.cindy.myfirst.app.MESSAGE";

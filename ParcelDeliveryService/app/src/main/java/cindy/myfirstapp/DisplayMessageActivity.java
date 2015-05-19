@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.app.Activity;
 
 
 public class DisplayMessageActivity extends ActionBarActivity {

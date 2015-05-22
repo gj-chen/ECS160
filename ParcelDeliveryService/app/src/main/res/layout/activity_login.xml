@@ -36,9 +36,8 @@
         <!-- Register Form -->
         <Button
             android:id="@+id/register_button"
-            style="?android:textAppearanceSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:text="@string/button_register"
             android:textColor="#d1d1e0"
             android:background="#ffffff"
@@ -47,14 +46,13 @@
 
         <!-- Login Form -->
         <Button
-            android:id="@+id/login_id_button"
-            style="?android:textAppearanceSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/button_login"
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/login_text"
             android:textColor="#d1d1e0"
+            android:gravity="center"
             android:background="#ffffff"
-            android:onClick="sendMessage"
             android:layout_weight="0.5"/>
     </LinearLayout>
 

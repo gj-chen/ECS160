@@ -32,27 +32,33 @@
         android:layout_height="26dp"
         android:layout_marginTop="10dp"
         android:weightSum="1">
-        <!-- Register Form // eventually change this to button/new activity?-->
-        <TextView
-            android:id="@+id/register"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/signup"
+
+        <!-- Register Form -->
+        <Button
+            android:id="@+id/register_button"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_register"
             android:textColor="#d1d1e0"
             android:background="#ffffff"
+            android:onClick="sendMessage"
             android:layout_weight="0.5"/>
-        <!-- Login Form // change this to button/new activity?-->
-        <TextView
-            android:id="@+id/login"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/login"
+
+        <!-- Login Form -->
+        <Button
+            android:id="@+id/login_id_button"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_login"
             android:textColor="#d1d1e0"
-            android:gravity="center"
-            android:background="#cceeea"
-            android:layout_weight="0.50"/>
+            android:background="#ffffff"
+            android:onClick="sendMessage"
+            android:layout_weight="0.5"/>
     </LinearLayout>
+
+
 
     <!-- username/password login-->
     <LinearLayout
@@ -107,14 +113,7 @@
         android:orientation="vertical"
         android:paddingRight="70dp"
         android:paddingLeft="70dp">
-        <!-- facebook login button-->
-        <Button
-            android:id="@+id/facebook_login"
-            style="?android:textAppearanceSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/facebook_login"
-            android:textColor="#d1d1e0"
-            android:background="#cceeea"/>
+        <!-- took out facebook sign in -->
+
     </LinearLayout>
 </LinearLayout>

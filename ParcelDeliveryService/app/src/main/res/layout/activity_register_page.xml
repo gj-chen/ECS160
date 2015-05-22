@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Login Activity-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical|center_horizontal"
+    android:orientation = "vertical"
+    android:background="#FFFFBD">
+
+    <!-- App Logo-->
+    <LinearLayout
+        android:id="@+id/screen1"
+        android:layout_width="match_parent"
+        android:layout_height="192dp"
+        android:gravity="center_vertical|center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mi2U"
+            android:textSize="100dp"
+            android:id="@+id/logo"
+            android:textColor="#d1d1e0"/>
+    </LinearLayout>
+
+
+
+
+    <!-- new user sign up-->
+    <LinearLayout
+        android:id="@+id/screen2"
+        android:layout_width="match_parent"
+        android:layout_height="26dp"
+        android:layout_marginTop="10dp"
+        android:weightSum="1">
+
+        <!-- Register Form -->
+
+        <TextView
+            android:id="@+id/register_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/button_register"
+            android:textColor="#d1d1e0"
+            android:gravity="center"
+            android:background="#ffffff"
+            android:layout_weight="0.50"/>
+
+        <!-- Login Form -->
+        <Button
+            android:id="@+id/login_id_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/button_login"
+            android:textColor="#d1d1e0"
+            android:gravity="center"
+            android:background="#ffffff"
+            android:layout_weight="0.50"/>
+    </LinearLayout>
+
+
+
+    <!-- username/password login-->
+    <LinearLayout
+        android:id="@+id/screen3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical|center_horizontal"
+        android:background="#cceeea">
+
+        <LinearLayout android:id="@+id/login_form" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:orientation="vertical">
+            <!-- username form-->
+            <EditText android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:textColorHint="#d1d1e0"
+                android:textColor="#ffbbbcca"
+                android:hint="@string/prompt_username"/>
+            <!-- password form-->
+            <EditText android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:textColorHint="#d1d1e0"
+                android:textColor="#ffbbbcca"
+                android:hint="@string/prompt_password"/>
+            <!-- register button-->
+            <Button
+                android:id="@+id/registration"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/registration"
+                android:textColor="#d1d1e0"
+                android:background="#ffffff"
+                android:onClick="sendMessage"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- the rest of the screen underneath login button / took out the facebook login-->
+    <LinearLayout
+        android:id="@+id/screen4"
+        android:layout_width="match_parent"
+        android:layout_height="116dp"
+        android:gravity="bottom"
+        android:background="#cceeea"
+        android:orientation="vertical"
+        android:paddingRight="70dp"
+        android:paddingLeft="70dp">
+
+    </LinearLayout>
+</LinearLayout>

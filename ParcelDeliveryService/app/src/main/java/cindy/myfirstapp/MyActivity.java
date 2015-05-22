@@ -11,6 +11,19 @@ import android.view.View;
 import android.widget.EditText;
 //import android.support.v7.widget.SearchView;
 import android.widget.SearchView;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.content.Intent;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import android.app.Activity;
+import android.os.AsyncTask;
+import android.widget.TextView;
 
 
 public class MyActivity extends ActionBarActivity {
@@ -19,6 +32,27 @@ public class MyActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        addListenerOnButton();
+    }
+
+    Button button;
+
+    public void addListenerOnButton() {
+
+        final Context context = this;
+
+        button = (Button)findViewById(R.id.register_button);
+
+        button.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(context, RegisterPage.class);
+                startActivity(intent);
+            }
+
+        });
+
     }
 
     @Override
@@ -70,4 +104,7 @@ public class MyActivity extends ActionBarActivity {
     public void openSearch() {
 
     }
+
+
+
 }

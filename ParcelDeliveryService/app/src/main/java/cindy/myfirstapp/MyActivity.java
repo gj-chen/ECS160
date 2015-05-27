@@ -38,21 +38,16 @@ public class MyActivity extends ActionBarActivity {
     Button button;
 
     public void addListenerOnButton() {
-
         final Context context = this;
-
         button = (Button)findViewById(R.id.register_button);
 
         button.setOnClickListener(new OnClickListener() {
-
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(context, RegisterPage.class);
                 startActivity(intent);
             }
-
         });
-
     }
 
     @Override

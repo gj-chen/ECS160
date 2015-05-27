@@ -10,6 +10,17 @@ import android.view.View;
 import android.widget.Button;
 
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import android.app.Activity;
+import android.os.AsyncTask;
+import android.widget.TextView;
+
+
 
 public class RegisterPage extends ActionBarActivity {
     Button button;
@@ -19,6 +30,42 @@ public class RegisterPage extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_page);
         addListenerOnButton();
+        new FetchSQL().execute();
+    }
+
+    private class FetchSQL extends AsyncTask<Void,Void,String>{
+        @Override
+        protected String doInBackground(Void... params) {
+            String sqltest = "";
+
+            try{
+                Class.forName("org.postgresql.Driver");
+            }catch (ClassNotFoundException e){
+                e.printStackTrace();
+                sqltest = e.toString();
+            }
+
+            String url = "jdbc:postgresql://10.0.2.2/postgres?user=postgres&password=05258729";
+            Connection conn;
+            try{
+                DriverManager.setLoginTimeout(5);
+                conn = DriverManager.getConnection(url);
+                Statement st = conn.createStatement();
+                String hello;
+                hello = "SELECT 1";
+                ResultSet rs = st.executeQuery(hello);
+                while(rs.next()) {
+                    sqltest = rs.getString(1);
+                }
+                rs.close();
+                st.close();
+                conn.close(); //close connection to database
+            }catch(SQLException e){
+                e.printStackTrace();
+                sqltest = e.toString();
+            }
+return sqltest;
+        }
     }
 
     private void addListenerOnButton() {

@@ -31,7 +31,7 @@ public class MyActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login); // default to login view
         addListenerOnButton();
     }
 
@@ -44,7 +44,7 @@ public class MyActivity extends ActionBarActivity {
         button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Intent intent = new Intent(context, RegisterPage.class);
+                Intent intent = new Intent(context, RegisterPage.class); // switch to register view
                 startActivity(intent);
             }
         });
@@ -93,11 +93,11 @@ public class MyActivity extends ActionBarActivity {
     }
 
     public void openSettings() {
-
+        //
     }
 
     public void openSearch() {
-
+        //
     }
 
 

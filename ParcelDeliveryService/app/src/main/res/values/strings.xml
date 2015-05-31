@@ -14,4 +14,10 @@
     <string name="title_activity_register_page">RegisterPage</string>
     <string name="registration">Register</string>
     <string name="login_text">LOGIN</string>
+    <string name="title_activity_map_me">MapMe</string>
+
+    <string name="knapsack">my knapsack</string>
+    <string name="knapsackItem">item</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_friends">FriendsActivity</string>
 </resources>

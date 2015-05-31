@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -51,23 +52,78 @@ public class RegisterPage extends ActionBarActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                new FetchSQL().execute();
+                //System.out.println("hi");
+               new FetchSQL().execute();
             }
         });
     }
 
-
-    private class FetchSQL extends AsyncTask<Void, Void, String>{
+    TextView resultArea;
+    private class FetchSQL extends AsyncTask<Void,Void,String> {
         @Override
         protected String doInBackground(Void... params) {
-            String return_value = "";
+
+            System.out.println("hi");
+            String retval = "";
+            try {
+                Class.forName("org.postgresql.Driver");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+                retval = e.toString();
+            }
+            //String url = "jdbc:postgresql://10.0.2.2:5432/postgres?user=postgres&password=05258729";
+            String url = "jdbc:postgresql://localhost:5432/postgres?user=postgres&password=05258729";
+            Connection conn;
+            String username = getString(R.string.prompt_username);
+            String password = getString(R.string.prompt_password);
+            System.out.println("hello");
+            try {
+                DriverManager.setLoginTimeout(5);
+                System.out.println("Did not timeout T_T");
+                conn = DriverManager.getConnection(url);
+                System.out.println("Made it into the database TYBG");
+                Statement st = conn.createStatement();
+                System.out.println("Before insert");
+                String sql;
+                sql = "INSERT INTO users(username) VALUES (?)";
+                ResultSet rs = st.executeQuery(sql+username);
+                System.out.println("after insert");
+                while(rs.next()) {
+                    retval = rs.getString(1);
+                    System.out.print("Username = " + retval);
+                }
+                rs.close();
+                st.close();
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                retval = e.toString();
+                System.out.println("inside catch");
+            }
+            return retval;
+        }
+        @Override
+        protected void onPostExecute(String value) {
+            //resultArea.setText(value);
+            System.out.println("last hello");
+        }
+    }
+
+
+
+
+
+    /*private class FetchSQL extends AsyncTask<Void, Void, String>{
+        @Override
+        protected String doInBackground(Void... params) {
+            /*String return_value = "";
 
             try{
                 Class.forName(".org.postgresql.Driver");
             }catch (ClassNotFoundException e) {
                 e.printStackTrace();
                 return_value = e.toString();
-            }
+            } //throws & catches error for ClassNotFoundException (driver not found)
 
             String url = "jdbc:postgresql://10.0.2.2/postgres?user=postgres&password=05258729";
             Connection conn;
@@ -96,7 +152,7 @@ public class RegisterPage extends ActionBarActivity {
         return return_value;
         }
 
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

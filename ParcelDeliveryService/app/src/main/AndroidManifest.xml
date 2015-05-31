@@ -3,7 +3,10 @@
     package="cindy.myfirstapp" >
 
     <uses-sdk android:minSdkVersion="11" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    /* required to find the user's last known location */
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <android:uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -53,6 +56,14 @@
         <activity
             android:name=".RegisterPage"
             android:label="@string/title_activity_register_page" >
+        </activity>
+        <activity
+            android:name=".MapMeActivity"
+            android:label="@string/title_activity_map_me" >
+        </activity>
+        <activity
+            android:name=".FriendsActivity"
+            android:label="@string/title_activity_friends" >
         </activity>
     </application>
 

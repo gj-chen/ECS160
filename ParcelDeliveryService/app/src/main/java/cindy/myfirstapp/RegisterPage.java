@@ -67,19 +67,21 @@ public class RegisterPage extends ActionBarActivity {
             String retval = "";
             try {
                 Class.forName("org.postgresql.Driver");
+                System.out.println("driver is loaded");
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
                 retval = e.toString();
+                System.out.println("driver is not loaded");
             }
-            //String url = "jdbc:postgresql://10.0.2.2:5432/postgres?user=postgres&password=05258729";
-            String url = "jdbc:postgresql://localhost:5432/postgres?user=postgres&password=05258729";
+            String url = "jdbc:postgresql://10.0.2.2/postgres?user=postgres&password=05258729";
+            //String url = "jdbc:postgresql://localhost:5432/postgres?user=postgres&password=05258729";
             Connection conn;
             String username = getString(R.string.prompt_username);
             String password = getString(R.string.prompt_password);
             System.out.println("hello");
             try {
                 DriverManager.setLoginTimeout(5);
-                System.out.println("Did not timeout T_T");
+                System.out.println("Did not timeout T_T.");
                 conn = DriverManager.getConnection(url);
                 System.out.println("Made it into the database TYBG");
                 Statement st = conn.createStatement();
@@ -98,7 +100,7 @@ public class RegisterPage extends ActionBarActivity {
             } catch (SQLException e) {
                 e.printStackTrace();
                 retval = e.toString();
-                System.out.println("inside catch");
+                System.out.println(retval);
             }
             return retval;
         }

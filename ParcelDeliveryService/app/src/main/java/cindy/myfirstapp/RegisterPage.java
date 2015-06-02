@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.sql.Connection;
@@ -72,8 +73,12 @@ public class RegisterPage extends ActionBarActivity {
             String url = "jdbc:postgresql://10.0.2.2/postgres?user=postgres&password=05258729";
             Connection connection = null;
             PreparedStatement statement = null;
-            String username = getString(R.string.prompt_username);
-            String password = getString(R.string.prompt_password);
+            //String username = getString(R.string.prompt_username);
+            //String password = getString(R.string.prompt_password);
+            EditText user = (EditText)findViewById(R.id.username);
+            String username = user.getText().toString();
+            EditText pass = (EditText)findViewById(R.id.password);
+            String password = pass.getText().toString();
 
             //String sql = "INSERT INTO users" + "VALUES (?, ?)";
             String sql = "INSERT INTO users VALUES(?, ?)";
@@ -82,17 +87,12 @@ public class RegisterPage extends ActionBarActivity {
 
             try {
                 DriverManager.setLoginTimeout(5);
-                System.out.println("did not time out");
                 connection = DriverManager.getConnection(url);
-                System.out.println("made it into the database");
                 statement = connection.prepareStatement(sql);
-                System.out.println("the prepare statement works!!");
                 statement.setString(1, username);
                 statement.setString(2, password);
-                System.out.println("setString was successful!");
                 //ResultSet rs = statement.executeQuery();
                 int rs = statement.executeUpdate();
-                System.out.println("after insert");
                 //ResultSet rs = null;
                 /*while(rs.next()) {
                     retval = rs.getString(1);
@@ -111,7 +111,6 @@ public class RegisterPage extends ActionBarActivity {
         @Override
         protected void onPostExecute(String value) {
             //resultArea.setText(value);
-            System.out.println("last hello");
         }
     }
 

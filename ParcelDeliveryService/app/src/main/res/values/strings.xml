@@ -20,4 +20,7 @@
     <string name="knapsackItem">item</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_friends">FriendsActivity</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="friends">my friends</string>
 </resources>

@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 
 
 public class DisplayMessageActivity extends ActionBarActivity {
@@ -21,15 +20,8 @@ public class DisplayMessageActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        // get message from the intent
-//        Intent intent = getIntent();
-//        String message = intent.getStringExtra(MyActivity.EXTRA_MESSAGE);
-//        // create the text view
-//        TextView textView = new TextView(this);
-//        textView.setText("Hello, " + message +",");
-//        textView.setText("Welcome to your knapsack!");
 
-        // set the display_message as the activity layout
+        // set the display_message (knapsack) as the activity layout
         setContentView(R.layout.activity_display_message);
 
         //retrieve the object
@@ -46,7 +38,8 @@ public class DisplayMessageActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // go to new view with friends list
-                setContentView(R.layout.activity_friends);
+                selectItem(view);
+
             }
         });
     }
@@ -72,5 +65,11 @@ public class DisplayMessageActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    // called when the a knapsack item is clicked
+    public void selectItem(View view) {
+        Intent intent = new Intent(this, FriendsActivity.class);
+        startActivity(intent);
     }
 }

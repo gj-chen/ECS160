@@ -4,19 +4,33 @@
 
     <uses-sdk android:minSdkVersion="11" />
 
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    /* required to find the user's last known location */
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-
-    <android:uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="18" />
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <android:uses-permission
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
+
+    <!--
+     To retrieve OAuth 2.0 tokens or invalidate tokens to disconnect a user. This disconnect
+     option is required to comply with the Google+ Sign-In developer policies
+    -->
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" /> <!-- To retrieve the account name (email) as part of sign-in: -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" /> <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!--used by API to download map tiles from Google Maps servers-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- allows API to cache map tile data in the device's external storage area-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!--allows API to use WiFI or data to determine the device's location-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- uses OpenGL ES version 2 to render the map-->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
 
     <application
         android:allowBackup="true"
@@ -60,12 +74,19 @@
             android:label="@string/title_activity_register_page" >
         </activity>
         <activity
-            android:name=".MapMeActivity"
-            android:label="@string/title_activity_map_me" >
-        </activity>
-        <activity
             android:name=".FriendsActivity"
             android:label="@string/title_activity_friends" >
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBrbRNM3kZXxR3HHUAm0JCkxPUjSg7rIBc"/>
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps" >
         </activity>
     </application>
 

@@ -111,6 +111,7 @@ public class RegisterPage extends ActionBarActivity {
         @Override
         protected void onPostExecute(String value) {
             //resultArea.setText(value);
+            setContentView(R.layout.activity_login);
         }
     }
 

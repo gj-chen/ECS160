@@ -13,9 +13,9 @@ import android.widget.TextView;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
 
@@ -62,41 +62,45 @@ public class RegisterPage extends ActionBarActivity {
     private class FetchSQL extends AsyncTask<Void,Void,String> {
         @Override
         protected String doInBackground(Void... params) {
-
-            System.out.println("hi");
             String retval = "";
             try {
                 Class.forName("org.postgresql.Driver");
-                System.out.println("driver is loaded");
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
                 retval = e.toString();
-                System.out.println("driver is not loaded");
             }
             String url = "jdbc:postgresql://10.0.2.2/postgres?user=postgres&password=05258729";
-            //String url = "jdbc:postgresql://localhost:5432/postgres?user=postgres&password=05258729";
-            Connection conn;
+            Connection connection = null;
+            PreparedStatement statement = null;
             String username = getString(R.string.prompt_username);
             String password = getString(R.string.prompt_password);
-            System.out.println("hello");
+
+            //String sql = "INSERT INTO users" + "VALUES (?, ?)";
+            String sql = "INSERT INTO users VALUES(?, ?)";
+            //String sql = "INSERT INTO users VALUES("+username+", "+password+")";
+            //String sql = "INSERT INTO users(username, password) VALUES ("+username+","+password+")";
+
             try {
                 DriverManager.setLoginTimeout(5);
-                System.out.println("Did not timeout T_T.");
-                conn = DriverManager.getConnection(url);
-                System.out.println("Made it into the database TYBG");
-                Statement st = conn.createStatement();
-                System.out.println("Before insert");
-                String sql;
-                sql = "INSERT INTO users(username) VALUES (?)";
-                ResultSet rs = st.executeQuery(sql+username);
+                System.out.println("did not time out");
+                connection = DriverManager.getConnection(url);
+                System.out.println("made it into the database");
+                statement = connection.prepareStatement(sql);
+                System.out.println("the prepare statement works!!");
+                statement.setString(1, username);
+                statement.setString(2, password);
+                System.out.println("setString was successful!");
+                //ResultSet rs = statement.executeQuery();
+                int rs = statement.executeUpdate();
                 System.out.println("after insert");
-                while(rs.next()) {
+                //ResultSet rs = null;
+                /*while(rs.next()) {
                     retval = rs.getString(1);
                     System.out.print("Username = " + retval);
                 }
-                rs.close();
-                st.close();
-                conn.close();
+                rs.close();*/
+                statement.close();
+                connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
                 retval = e.toString();

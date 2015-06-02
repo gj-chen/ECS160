@@ -1,9 +1,14 @@
 package cindy.myfirstapp;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 
 public class FriendsActivity extends ActionBarActivity {
@@ -12,6 +17,25 @@ public class FriendsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
+
+        //retrieve the object
+        ListView friendsList = (ListView) findViewById(R.id.friends_List);
+        // populate the data
+        String[] friends = new String[]{"friend1", "friend2", "friend3", "friend4"};
+        // initialize the adapter
+        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, friends);
+        friendsList.setAdapter(listAdapter);
+
+//        knapsackList.setOnItemClickListener(mMessageClickedHandler);
+        // callback function when knapsack item is clicked
+        friendsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                sendDelivery(view);
+
+
+            }
+        });
     }
 
     @Override
@@ -34,5 +58,10 @@ public class FriendsActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    // called when the delivery button is clicked
+    public void sendDelivery(View view) {
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
     }
 }

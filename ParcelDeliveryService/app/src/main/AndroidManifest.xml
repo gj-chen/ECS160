@@ -4,22 +4,8 @@
 
     <uses-sdk android:minSdkVersion="11" />
 
-<<<<<<< HEAD
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission
-=======
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    /* required to find the user's last known location */
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-
-    <android:uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="18" />
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <android:uses-permission
->>>>>>> af9b0af4ba6de782302bb669919a3fb9bf989cd5
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
 

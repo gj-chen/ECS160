@@ -115,10 +115,6 @@ public class RegisterPage extends ActionBarActivity {
         }
     }
 
-
-
-
-
     /*private class FetchSQL extends AsyncTask<Void, Void, String>{
         @Override
         protected String doInBackground(Void... params) {

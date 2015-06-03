@@ -90,12 +90,17 @@
             android:label="@string/title_activity_maps" >
         </activity>
         <activity
+<<<<<<< HEAD
             android:name=".additem"
             android:label="@string/title_activity_additem" >
         </activity>
         <activity
             android:name=".UpdateKnapsack"
             android:label="@string/title_activity_update_knapsack" >
+=======
+            android:name=".DeliveryActivity"
+            android:label="@string/title_activity_delivery" >
+>>>>>>> c04842e7e9ece0748cc299e0a9f683653debfd52
         </activity>
     </application>
 

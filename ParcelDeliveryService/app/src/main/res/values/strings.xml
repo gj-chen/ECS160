@@ -23,16 +23,13 @@
     <string name="title_activity_maps">Map</string>
 
     <string name="friends">my friends</string>
-<<<<<<< HEAD
     <string name= "add_item">Add Parcel</string>
     <string name= "parcel">Parcel</string>
     <string name="title_activity_add__item">Add_Item</string>
     <string name="title_activity_additem">additem</string>
     <string name="prompt_parcel">Name of Parcel</string>
     <string name="title_activity_update_knapsack">UpdateKnapsack</string>
-=======
     <string name="title_activity_delivery">DeliveryActivity</string>
 
     <string name="delivery">pick a delivery</string>
->>>>>>> c04842e7e9ece0748cc299e0a9f683653debfd52
 </resources>

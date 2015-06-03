@@ -16,11 +16,17 @@
     <string name="login_text">LOGIN</string>
     <string name="title_activity_map_me">MapMe</string>
 
-    <string name="knapsack">my knapsack</string>
+    <string name="knapsack">My Knapsack</string>
     <string name="knapsackItem">item</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_friends">FriendsActivity</string>
     <string name="title_activity_maps">Map</string>
 
     <string name="friends">my friends</string>
+    <string name= "add_item">Add Parcel</string>
+    <string name= "parcel">Parcel</string>
+    <string name="title_activity_add__item">Add_Item</string>
+    <string name="title_activity_additem">additem</string>
+    <string name="prompt_parcel">Name of Parcel</string>
+    <string name="title_activity_update_knapsack">UpdateKnapsack</string>
 </resources>

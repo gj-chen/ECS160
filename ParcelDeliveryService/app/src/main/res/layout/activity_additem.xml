@@ -9,19 +9,27 @@
 
     <!-- knapsack -->
     <LinearLayout
-        android:id="@+id/knapsack"
+        android:id="@+id/insert_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical">
-        <!-- "my knapsack" -->
+        <!-- "Knapsack Insertion" -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/knapsack"
-            android:textSize="40dp"
-            android:id="@+id/logo"
+            android:text="@string/parcel"
+            android:textSize="40sp"
+            android:id="@+id/insertion"
             android:textColor="#d1d1e0"/>
+        <EditText android:id="@+id/parcel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:textColorHint="#d1d1e0"
+            android:textColor="#ffbbbcca"
+            android:hint="@string/prompt_parcel"/>
         <!-- Button to add item -->
         <Button
             android:id="@+id/add_item"
@@ -31,10 +39,5 @@
             android:textColor="#d1d1e0"
             android:background="#ffcdf1ff"
             android:onClick="sendMessage"/>
-        <!-- create display of knapsack items-->
-        <ListView
-            android:id="@+id/knapsack_List"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
     </LinearLayout>
 </LinearLayout>

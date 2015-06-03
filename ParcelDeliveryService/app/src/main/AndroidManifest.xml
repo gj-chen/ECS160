@@ -21,16 +21,16 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-    <!--used by API to download map tiles from Google Maps servers-->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <!-- allows API to cache map tile data in the device's external storage area-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <!--allows API to use WiFI or data to determine the device's location-->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <!-- uses OpenGL ES version 2 to render the map-->
+    <!-- used by API to download map tiles from Google Maps servers -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- allows API to cache map tile data in the device's external storage area -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- allows API to use WiFI or data to determine the device's location -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- uses OpenGL ES version 2 to render the map -->
     <uses-feature
         android:glEsVersion="0x00020000"
-        android:required="true"/>
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -83,10 +83,19 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBrbRNM3kZXxR3HHUAm0JCkxPUjSg7rIBc"/>
+            android:value="AIzaSyBrbRNM3kZXxR3HHUAm0JCkxPUjSg7rIBc" />
+
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" >
+        </activity>
+        <activity
+            android:name=".additem"
+            android:label="@string/title_activity_additem" >
+        </activity>
+        <activity
+            android:name=".UpdateKnapsack"
+            android:label="@string/title_activity_update_knapsack" >
         </activity>
     </application>
 

@@ -20,7 +20,7 @@ public class DeliveryActivity extends ActionBarActivity {
         setContentView(R.layout.activity_delivery);
 
         //retrieve the object
-        ListView delivery = (ListView) findViewById(R.id.delivery_List_List);
+        ListView delivery = (ListView) findViewById(R.id.delivery_List);
         // populate the data
         String[] delivery_type = new String[]{"indirect", "direct"};
         // initialize the adapter

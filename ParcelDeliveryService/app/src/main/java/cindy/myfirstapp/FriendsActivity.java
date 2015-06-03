@@ -1,6 +1,7 @@
 package cindy.myfirstapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -61,7 +62,12 @@ public class FriendsActivity extends ActionBarActivity {
     }
     // called when the delivery button is clicked
     public void sendDelivery(View view) {
-        Intent intent = new Intent(this, MapsActivity.class);
+//        Intent intent = new Intent(this, MapsActivity.class);
+//        startActivity(intent);
+
+        /*open up google maps application instead of using MapsActivity! */
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                Uri.parse("http://maps.google.com/maps?saddr=enter your location&daadr=enter your destination"));
         startActivity(intent);
     }
 }

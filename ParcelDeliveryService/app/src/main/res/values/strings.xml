@@ -23,4 +23,7 @@
     <string name="title_activity_maps">Map</string>
 
     <string name="friends">my friends</string>
+    <string name="title_activity_delivery">DeliveryActivity</string>
+
+    <string name="delivery">pick a delivery</string>
 </resources>

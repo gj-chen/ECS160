@@ -12,29 +12,31 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
-public class FriendsActivity extends ActionBarActivity {
+public class DeliveryActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friends);
+        setContentView(R.layout.activity_delivery);
 
         //retrieve the object
-        ListView friendsList = (ListView) findViewById(R.id.friends_List);
+        ListView delivery = (ListView) findViewById(R.id.delivery_List_List);
         // populate the data
-        String[] friends = new String[]{"friend1", "friend2", "friend3", "friend4"};
+        String[] delivery_type = new String[]{"indirect", "direct"};
         // initialize the adapter
-        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, friends);
-        friendsList.setAdapter(listAdapter);
+        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, delivery_type);
+        delivery.setAdapter(listAdapter);
 
-//        knapsackList.setOnItemClickListener(mMessageClickedHandler);
-        // callback function when friend is clicked
-        friendsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        // callback function when delivery type is clicked
+        delivery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                sendDelivery(view);
-
-
+                if (position == 1) {
+                    sendDelivery(view);
+                }
+                else {
+                    pickIndirectFriend(view);
+                }
             }
         });
     }
@@ -42,7 +44,7 @@ public class FriendsActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_friends, menu);
+        getMenuInflater().inflate(R.menu.menu_delivery, menu);
         return true;
     }
 
@@ -60,14 +62,16 @@ public class FriendsActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    // called when the delivery button is clicked
-    public void sendDelivery(View view) {
-        Intent intent = new Intent(this, DeliveryActivity.class);
-        startActivity(intent);
 
+    public void sendDelivery(View view) {
         /*open up google maps application instead of using MapsActivity! */
-//        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-//                Uri.parse("http://maps.google.com/maps?saddr=enter your location&daadr=enter your destination"));
-//        startActivity(intent);
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                Uri.parse("http://maps.google.com/maps?saddr=enter your location&daadr=enter your destination"));
+        startActivity(intent);
+    }
+
+    public void pickIndirectFriend(View view) {
+        Intent intent = new Intent(this, FriendsActivity.class);
+        startActivity(intent);
     }
 }

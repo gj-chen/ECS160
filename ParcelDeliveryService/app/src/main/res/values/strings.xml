@@ -33,4 +33,7 @@
 
     <string name="delivery">pick a delivery</string>
     <string name="remove_item">Remove Parcel</string>
+    <string name="remove_friend">Remove Friend</string>
+    <string name="add_friend">Add Friend</string>
+    <string name="prompt_friend">Name of Friend</string>
 </resources>

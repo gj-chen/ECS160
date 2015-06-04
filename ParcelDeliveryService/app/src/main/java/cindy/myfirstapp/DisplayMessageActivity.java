@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class DisplayMessageActivity extends ActionBarActivity {
@@ -60,14 +61,27 @@ public class DisplayMessageActivity extends ActionBarActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
+                EditText parcel_item = (EditText) findViewById(R.id.parcel);
+                String parcel = parcel_item.getText().toString();
+                knapsackItems.add(parcel);
+                listAdapter.notifyDataSetChanged();
+                System.out.println(knapsackItems);
+            }
+        });
+
+        Button button2;
+        button2 = (Button)findViewById(R.id.remove_item);
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
                 EditText parcel_item = (EditText)findViewById(R.id.parcel);
                 String parcel = parcel_item.getText().toString();
-                System.out.println("hello kekeke");
-                //on click, update list in knapsack
-                //listAdapter = null;
-                knapsackItems.add(parcel);
-                //listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, knapsackItems);
-                //knapsackList.setAdapter(listAdapter);
+
+                for(int i = 0; i < knapsackItems.size(); i++) {
+                    if(Objects.equals(parcel, knapsackItems.get(i)))
+                        knapsackItems.remove(parcel);
+                }
                 listAdapter.notifyDataSetChanged();
                 System.out.println(knapsackItems);
             }

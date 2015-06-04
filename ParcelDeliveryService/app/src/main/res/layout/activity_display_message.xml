@@ -40,6 +40,15 @@
             android:textColor="#d1d1e0"
             android:background="#ffcdf1ff"
             android:onClick="sendMessage"/>
+        <!-- Button to remove item -->
+        <Button
+            android:id="@+id/remove_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/remove_item"
+            android:textColor="#d1d1e0"
+            android:background="#ffcdf1ff"
+            android:onClick="sendMessage"/>
         <!-- create display of knapsack items-->
         <ListView
             android:id="@+id/knapsack_List"

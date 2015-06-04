@@ -32,4 +32,5 @@
     <string name="title_activity_delivery">DeliveryActivity</string>
 
     <string name="delivery">pick a delivery</string>
+    <string name="remove_item">Remove Parcel</string>
 </resources>

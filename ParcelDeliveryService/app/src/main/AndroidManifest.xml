@@ -90,10 +90,6 @@
             android:label="@string/title_activity_maps" >
         </activity>
         <activity
-            android:name=".UpdateKnapsack"
-            android:label="@string/title_activity_update_knapsack" >
-        </activity>
-        <activity
             android:name=".DeliveryActivity"
             android:label="@string/title_activity_delivery" >
         </activity>

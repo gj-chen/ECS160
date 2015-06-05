@@ -73,32 +73,38 @@ public class RegisterPage extends ActionBarActivity {
             String url = "jdbc:postgresql://10.0.2.2/postgres?user=postgres&password=05258729";
             Connection connection = null;
             PreparedStatement statement = null;
-            //String username = getString(R.string.prompt_username);
-            //String password = getString(R.string.prompt_password);
+            PreparedStatement statement2 = null;
+
             EditText user = (EditText)findViewById(R.id.username);
             String username = user.getText().toString();
             EditText pass = (EditText)findViewById(R.id.password);
             String password = pass.getText().toString();
 
-            //String sql = "INSERT INTO users" + "VALUES (?, ?)";
-            String sql = "INSERT INTO users VALUES(?, ?)";
-            //String sql = "INSERT INTO users VALUES("+username+", "+password+")";
-            //String sql = "INSERT INTO users(username, password) VALUES ("+username+","+password+")";
+            //SQL commands
+            String sql = "SELECT * from users WHERE username = ? AND password = ?";
+            String sql1 = "INSERT INTO users VALUES(?, ?)";
 
             try {
                 DriverManager.setLoginTimeout(5);
                 connection = DriverManager.getConnection(url);
+
                 statement = connection.prepareStatement(sql);
+                statement2 = connection.prepareStatement(sql1);
+
                 statement.setString(1, username);
                 statement.setString(2, password);
-                //ResultSet rs = statement.executeQuery();
-                int rs = statement.executeUpdate();
-                //ResultSet rs = null;
-                /*while(rs.next()) {
-                    retval = rs.getString(1);
-                    System.out.print("Username = " + retval);
+
+                //check database for registration info
+                //if(stmt) returns boolean true, open login page
+                //else add to database
+
+                if((statement.executeUpdate()) > 0){
+                    setContentView(R.layout.activity_login);
                 }
-                rs.close();*/
+                else{
+                   int rs = statement2.executeUpdate();
+                }
+
                 statement.close();
                 connection.close();
             } catch (SQLException e) {
@@ -114,47 +120,6 @@ public class RegisterPage extends ActionBarActivity {
             setContentView(R.layout.activity_login);
         }
     }
-
-    /*private class FetchSQL extends AsyncTask<Void, Void, String>{
-        @Override
-        protected String doInBackground(Void... params) {
-            /*String return_value = "";
-
-            try{
-                Class.forName(".org.postgresql.Driver");
-            }catch (ClassNotFoundException e) {
-                e.printStackTrace();
-                return_value = e.toString();
-            } //throws & catches error for ClassNotFoundException (driver not found)
-
-            String url = "jdbc:postgresql://10.0.2.2/postgres?user=postgres&password=05258729";
-            Connection conn;
-            String username = getString(R.string.prompt_username);
-            String password = getString(R.string.prompt_password);
-
-            try{
-                DriverManager.setLoginTimeout(5);
-                conn = DriverManager.getConnection(url); //opens the database connection
-                Statement stmt = conn.createStatement(); //creates an SQL statement call
-                String sql;
-                //if username & password != in database
-                // insert into database
-                sql = "SELECT * FROM userinformation WHERE username= "+username+" AND pw = "+password+"";
-                ResultSet rs = stmt.executeQuery(sql);
-                while(!rs.next()){
-                    sql = "INSERT INTO userinformation(username, pw) VALUES('"+username+", "+password+"')";
-                }
-                rs.close();
-                stmt.close();
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return_value = e.toString();
-            }
-        return return_value;
-        }
-
-    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

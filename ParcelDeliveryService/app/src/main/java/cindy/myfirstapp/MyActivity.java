@@ -92,6 +92,8 @@ public class MyActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
+    
+
     public void openSettings() {
         //
     }

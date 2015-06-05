@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_vertical|center_horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation = "vertical"
     android:background="#ffcdf1ff">
 
@@ -14,7 +13,7 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical">
-        <!-- "my friends" -->
+         "my friends"
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,19 +21,26 @@
             android:textSize="40dp"
             android:id="@+id/logo"
             android:textColor="#d1d1e0"/>
-        <!-- Insert Friend name -->
+        <!--Insert Friend name-->
         <EditText android:id="@+id/friend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="left"
             android:singleLine="true"
             android:maxLines="1"
             android:textColorHint="#d1d1e0"
             android:textColor="#ffbbbcca"
             android:hint="@string/prompt_friend"/>
+        <ListView
+            android:id="@+id/friends_List"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:drawSelectorOnTop="false"/>
+
         <!-- Button to add friend -->
         <Button
             android:id="@+id/add_friend"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/add_friend"
             android:textColor="#d1d1e0"
@@ -43,16 +49,12 @@
         <!-- Button to remove friend -->
         <Button
             android:id="@+id/remove_friend"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/remove_friend"
             android:textColor="#d1d1e0"
             android:background="#ffcdf1ff"
             android:onClick="sendMessage"/>
-        <!-- create display of knapsack items-->
-        <ListView
-            android:id="@+id/friends_List"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
+         create display of knapsack items
     </LinearLayout>
 </LinearLayout>

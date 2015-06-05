@@ -1,7 +1,10 @@
 package cindy.myfirstapp;
 
+import android.app.ListActivity;
+import android.app.Notification;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,11 +16,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.security.AccessControlContext;
 import java.util.ArrayList;
 import java.util.Objects;
 
 
 public class FriendsActivity extends ActionBarActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +32,6 @@ public class FriendsActivity extends ActionBarActivity {
         //retrieve the object
         ListView friendsList = (ListView) findViewById(R.id.friends_List);
         // populate the data
-        //String[] friends = new String[]{"friend1", "friend2", "friend3", "friend4"};
         final ArrayList<String> friends = new ArrayList<String>();
 
         friends.add("Cindy");
@@ -39,8 +43,7 @@ public class FriendsActivity extends ActionBarActivity {
         final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, friends);
         friendsList.setAdapter(listAdapter);
 
-//        knapsackList.setOnItemClickListener(mMessageClickedHandler);
-        // callback function when friend is clicked
+        //callback function when friend is clicked
         friendsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -81,6 +84,7 @@ public class FriendsActivity extends ActionBarActivity {
         });
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

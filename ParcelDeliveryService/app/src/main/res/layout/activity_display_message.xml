@@ -31,6 +31,11 @@
             android:textColorHint="#d1d1e0"
             android:textColor="#ffbbbcca"
             android:hint="@string/prompt_parcel"/>
+        <!-- create display of knapsack items-->
+        <ListView
+            android:id="@+id/knapsack_List"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
         <!-- Button to add item -->
         <Button
             android:id="@+id/add_item"
@@ -49,10 +54,5 @@
             android:textColor="#d1d1e0"
             android:background="#ffcdf1ff"
             android:onClick="sendMessage"/>
-        <!-- create display of knapsack items-->
-        <ListView
-            android:id="@+id/knapsack_List"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
     </LinearLayout>
 </LinearLayout>

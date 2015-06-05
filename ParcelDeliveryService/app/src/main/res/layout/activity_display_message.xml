@@ -22,12 +22,30 @@
             android:textSize="40dp"
             android:id="@+id/logo"
             android:textColor="#d1d1e0"/>
+        <!-- Insert Parcel name -->
+        <EditText android:id="@+id/parcel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:textColorHint="#d1d1e0"
+            android:textColor="#ffbbbcca"
+            android:hint="@string/prompt_parcel"/>
         <!-- Button to add item -->
         <Button
             android:id="@+id/add_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/add_item"
+            android:textColor="#d1d1e0"
+            android:background="#ffcdf1ff"
+            android:onClick="sendMessage"/>
+        <!-- Button to remove item -->
+        <Button
+            android:id="@+id/remove_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/remove_item"
             android:textColor="#d1d1e0"
             android:background="#ffcdf1ff"
             android:onClick="sendMessage"/>

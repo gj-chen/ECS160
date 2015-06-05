@@ -9,7 +9,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class FriendsActivity extends ActionBarActivity {
@@ -22,9 +27,16 @@ public class FriendsActivity extends ActionBarActivity {
         //retrieve the object
         ListView friendsList = (ListView) findViewById(R.id.friends_List);
         // populate the data
-        String[] friends = new String[]{"friend1", "friend2", "friend3", "friend4"};
+        //String[] friends = new String[]{"friend1", "friend2", "friend3", "friend4"};
+        final ArrayList<String> friends = new ArrayList<String>();
+
+        friends.add("Cindy");
+        friends.add("Jason");
+        friends.add("Gloglo");
+        friends.add("Rogaway Senpai");
+
         // initialize the adapter
-        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, friends);
+        final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, friends);
         friendsList.setAdapter(listAdapter);
 
 //        knapsackList.setOnItemClickListener(mMessageClickedHandler);
@@ -33,10 +45,41 @@ public class FriendsActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 sendDelivery(view);
-
-
             }
         });
+
+        Button button;
+        button = (Button)findViewById(R.id.add_friend);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                EditText friend_item = (EditText) findViewById(R.id.friend);
+                String friend = friend_item.getText().toString();
+                friends.add(friend);
+                listAdapter.notifyDataSetChanged();
+                System.out.println(friends);
+            }
+        });
+
+        Button button2;
+        button2 = (Button)findViewById(R.id.remove_friend);
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                EditText friend_item = (EditText) findViewById(R.id.friend);
+                String friend = friend_item.getText().toString();
+
+                for (int i = 0; i < friends.size(); i++) {
+                    if (Objects.equals(friend, friends.get(i)))
+                        friends.remove(friend);
+                }
+                listAdapter.notifyDataSetChanged();
+                System.out.println(friends);
+            }
+        });
+
     }
 
     @Override

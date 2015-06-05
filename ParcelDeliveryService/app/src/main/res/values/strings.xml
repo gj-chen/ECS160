@@ -32,4 +32,13 @@
     <string name="title_activity_delivery">DeliveryActivity</string>
 
     <string name="delivery">pick a delivery</string>
+    <string name="direct">direct</string>
+    <string name="indirect">indirect</string>
+    <string name="deliverySuccess">delivery complete</string>
+    <string name="deliveryNoSuccess">unsuccessful</string>
+
+    <string name="remove_item">Remove Parcel</string>
+    <string name="remove_friend">Remove Friend</string>
+    <string name="add_friend">Add Friend</string>
+    <string name="prompt_friend">Name of Friend</string>
 </resources>

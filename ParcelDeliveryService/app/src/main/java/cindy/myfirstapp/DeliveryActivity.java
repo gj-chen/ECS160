@@ -1,5 +1,6 @@
 package cindy.myfirstapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 
@@ -18,25 +20,46 @@ public class DeliveryActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delivery);
+        final Context context = this;
 
-        //retrieve the object
-        ListView delivery = (ListView) findViewById(R.id.delivery_List);
-        // populate the data
-        String[] delivery_type = new String[]{"indirect", "direct"};
-        // initialize the adapter
-        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, delivery_type);
-        delivery.setAdapter(listAdapter);
-
-        // callback function when delivery type is clicked
-        delivery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /* direct delivery option */
+        Button direct_button;
+        direct_button = (Button)findViewById(R.id.directDelivery);
+        direct_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 1) {
-                    sendDelivery(view);
-                }
-                else {
-                    pickIndirectFriend(view);
-                }
+            public void onClick(View view) {
+                sendDelivery(view);
+            }
+        });
+        /* indirect delivery option */
+        Button indirect_button;
+        indirect_button = (Button)findViewById(R.id.indirectDelivery);
+        indirect_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pickIndirectFriend(view);
+            }
+        });
+
+        /* successful delivery option */
+        Button button;
+        button = (Button)findViewById(R.id.deliverySuccess);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, RegisterPage.class); // switch to register view
+                startActivity(intent);
+            }
+        });
+
+        /* unsuccessful delivery option */
+        Button button2;
+        button2 = (Button)findViewById(R.id.deliveryNoSuccess);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, RegisterPage.class); // switch to register view
+                startActivity(intent);
             }
         });
     }
@@ -74,4 +97,5 @@ public class DeliveryActivity extends ActionBarActivity {
         Intent intent = new Intent(this, FriendsActivity.class);
         startActivity(intent);
     }
+
 }

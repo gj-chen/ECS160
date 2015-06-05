@@ -4,27 +4,78 @@
     android:layout_height="match_parent"
     android:gravity="center_vertical|center_horizontal"
     android:orientation = "vertical"
-    android:background="#ffcdf1ff">
+    android:background="#ffcdf1ff"
+    android:weightSum="1">
 
     <!-- delivery -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:text="@string/delivery"
+        android:textSize="40dp"
+        android:id="@+id/logo"
+        android:textColor="#d1d1e0"
+        android:layout_weight=".1"/>
+
+    <Button
+        android:id="@+id/directDelivery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/direct"
+        android:textColor="#fffdfffa"
+        android:onClick="sendMessage"
+        android:layout_weight=".1" />
+
+    <Button
+        android:id="@+id/indirectDelivery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/indirect"
+        android:textColor="#fffdfffa"
+        android:onClick="sendMessage"
+        android:layout_weight=".1" />
+
     <LinearLayout
         android:id="@+id/deliveryType"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight=".6">
         <!-- "pick a delivery type" -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/delivery"
-            android:textSize="40dp"
-            android:id="@+id/logo"
-            android:textColor="#d1d1e0"/>
         <!-- create display -->
-        <ListView
-            android:id="@+id/delivery_List"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
+        <!--<ListView-->
+            <!--android:id="@+id/delivery_List"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"/>-->
+        <!-- create display-->
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/deliverySuccess"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/deliverySuccess"
+        android:textColor="#d1d1e0"
+        android:background="#ffcbffd8"
+        android:onClick="sendMessage" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/deliveryNoSuccess"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/deliveryNoSuccess"
+        android:textColor="#d1d1e0"
+        android:background="#ffffb6c3"
+        android:onClick="sendMessage" />
+
 </LinearLayout>

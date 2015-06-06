@@ -18,6 +18,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import android.widget.Toast;
+
 
 
 public class RegisterPage extends ActionBarActivity {
@@ -72,8 +74,9 @@ public class RegisterPage extends ActionBarActivity {
             }
             String url = "jdbc:postgresql://10.0.2.2/postgres?user=postgres&password=05258729";
             Connection connection = null;
-            PreparedStatement statement = null;
-            PreparedStatement statement2 = null;
+
+            PreparedStatement statement_insert = null;
+            PreparedStatement statement_select = null;
 
             EditText user = (EditText)findViewById(R.id.username);
             String username = user.getText().toString();
@@ -81,31 +84,52 @@ public class RegisterPage extends ActionBarActivity {
             String password = pass.getText().toString();
 
             //SQL commands
-            String sql = "SELECT * from users WHERE username = ? AND password = ?";
-            String sql1 = "INSERT INTO users VALUES(?, ?)";
+            String insert = "INSERT INTO users VALUES(?, ?)";
+            String select = "SELECT * FROM users WHERE username = ? AND password = ?";
+            //String select = "SELECT username AND password FROM users WHERE username = ? AND password = ?";
 
             try {
                 DriverManager.setLoginTimeout(5);
                 connection = DriverManager.getConnection(url);
 
-                statement = connection.prepareStatement(sql);
-                statement2 = connection.prepareStatement(sql1);
+                statement_insert = connection.prepareStatement(insert);
+                statement_select = connection.prepareStatement(select);
 
-                statement.setString(1, username);
-                statement.setString(2, password);
+                statement_insert.setString(1, username);
+                statement_insert.setString(2, password);
+
+                statement_select.setString(1, username);
+                statement_select.setString(2, password);
+
 
                 //check database for registration info
                 //if(stmt) returns boolean true, open login page
                 //else add to database
 
-                if((statement.executeUpdate()) > 0){
-                    setContentView(R.layout.activity_login);
+                if((statement_select.execute())){
+                    System.out.println("inside select");
+                    //open toast: already registered user -> goes to login page
+                    //Toast.makeText(getApplicationContext(),
+                      //      "Registered User Already Exists", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent();
+                    intent.setClass(getApplicationContext(),MyActivity.class);
+                    startActivity(intent);
                 }
                 else{
-                   int rs = statement2.executeUpdate();
+                    System.out.println("inside else - insert");
+                    int rs = statement_insert.executeUpdate();
+                    System.out.println("insert successful??");
+
+                    //Toast.makeText(getApplicationContext(),
+                      //      "Registration Successful! Please log in :)", Toast.LENGTH_LONG).show();
+
+                    Intent intent = new Intent();
+                    intent.setClass(getApplicationContext(),MyActivity.class);
+                    startActivity(intent);
                 }
 
-                statement.close();
+                statement_insert.close();
+                statement_select.close();
                 connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -116,8 +140,12 @@ public class RegisterPage extends ActionBarActivity {
         }
         @Override
         protected void onPostExecute(String value) {
-            //resultArea.setText(value);
-            setContentView(R.layout.activity_login);
+            /*Toast.makeText(getApplicationContext(),
+                    "Registration Successful! Please log in :)", Toast.LENGTH_LONG).show();
+
+            Intent intent = new Intent();
+            intent.setClass(getApplicationContext(),MyActivity.class);
+            startActivity(intent);*/
         }
     }
 

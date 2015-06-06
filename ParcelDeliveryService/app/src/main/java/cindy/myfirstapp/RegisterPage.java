@@ -61,7 +61,6 @@ public class RegisterPage extends ActionBarActivity {
         });
     }
 
-    TextView resultArea;
     private class FetchSQL extends AsyncTask<Void,Void,String> {
         @Override
         protected String doInBackground(Void... params) {
@@ -76,7 +75,6 @@ public class RegisterPage extends ActionBarActivity {
             Connection connection = null;
 
             PreparedStatement statement_insert = null;
-            //PreparedStatement statement_select = null;
 
             EditText user = (EditText)findViewById(R.id.username);
             String username = user.getText().toString();
@@ -86,37 +84,23 @@ public class RegisterPage extends ActionBarActivity {
             //SQL commands
             String insert = "INSERT INTO users VALUES(?, ?)";
             String check = "SELECT * FROM users WHERE username = '"+username+"' AND password = '"+password+"' ";
-            //String select = "SELECT * FROM users WHERE username = ? AND password = ?";
-            //String select = "SELECT username AND password FROM users WHERE username = ? AND password = ?";
+
 
             try {
                 DriverManager.setLoginTimeout(5);
                 connection = DriverManager.getConnection(url);
 
                 statement_insert = connection.prepareStatement(insert);
-                //statement_select = connection.prepareStatement(select);
                 Statement statement_check = connection.createStatement();
 
                 statement_insert.setString(1, username);
                 statement_insert.setString(2, password);
-
-                //statement_select.setString(1, username);
-                //statement_select.setString(2, password);
 
                 ResultSet rs = statement_check.executeQuery(check);
 
                 //if user is in database, send to login page
                 //else, insert into database (registration complete)
 
-                /*if((statement_select.execute())){
-                    System.out.println("inside select");
-                    //open toast: already registered user -> goes to login page
-                    //Toast.makeText(getApplicationContext(),
-                      //      "Registered User Already Exists", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent();
-                    intent.setClass(getApplicationContext(),MyActivity.class);
-                    startActivity(intent);
-                }*/
                 if(rs.next()){
                     System.out.println("inside check");
                     //open toast: already registered user -> goes to login page
@@ -151,12 +135,7 @@ public class RegisterPage extends ActionBarActivity {
         }
             @Override
         protected void onPostExecute(String value) {
-            /*Toast.makeText(getApplicationContext(),
-                    "Registration Successful! Please log in :)", Toast.LENGTH_LONG).show();
 
-            Intent intent = new Intent();
-            intent.setClass(getApplicationContext(),MyActivity.class);
-            startActivity(intent);*/
         }
     }
 

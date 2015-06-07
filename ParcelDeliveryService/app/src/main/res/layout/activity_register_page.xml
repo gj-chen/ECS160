@@ -98,13 +98,6 @@
                 android:textColor="#d1d1e0"
                 android:background="#ffffff"
                 android:onClick="sendMessage"/>
-            <Button
-                android:id="@+id/logintoast"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#d1d1e0"
-                android:background="#ffffff"
-                android:visibility="invisible"/>
         </LinearLayout>
 
     </LinearLayout>

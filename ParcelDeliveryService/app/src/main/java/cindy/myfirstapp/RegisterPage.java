@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
 import android.widget.Toast;
 
 
@@ -32,6 +34,7 @@ public class RegisterPage extends ActionBarActivity {
         setContentView(R.layout.activity_register_page);
         addListenerOnButton();
         addListenerOnButton1();
+
     }
 
     private void addListenerOnButton() {
@@ -62,6 +65,8 @@ public class RegisterPage extends ActionBarActivity {
     }
 
     private class FetchSQL extends AsyncTask<Void,Void,String> {
+        Context context = getApplicationContext();
+
         @Override
         protected String doInBackground(Void... params) {
             String retval = "";
@@ -102,21 +107,14 @@ public class RegisterPage extends ActionBarActivity {
                 //else, insert into database (registration complete)
 
                 if(rs.next()){
-                    System.out.println("inside check");
-                    //open toast: already registered user -> goes to login page
-                    //Toast.makeText(getApplicationContext(),
-                    //      "Registered User Already Exists", Toast.LENGTH_LONG).show();
+                    runToast();
+
                     Intent intent = new Intent();
                     intent.setClass(getApplicationContext(), MyActivity.class);
                     startActivity(intent);
                 }
                 else{
-                    System.out.println("inside else - insert");
                     int insert_db = statement_insert.executeUpdate();
-                    System.out.println("insert successful??");
-
-                    //Toast.makeText(getApplicationContext(),
-                      //      "Registration Successful! Please log in :)", Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent();
                     intent.setClass(getApplicationContext(), MyActivity.class);
@@ -133,11 +131,53 @@ public class RegisterPage extends ActionBarActivity {
             }
             return retval;
         }
-            @Override
-        protected void onPostExecute(String value) {
+        /*protected void onProgressUpdate(Integer integers) {
+            if(integers == 1){
+                Context context = getApplicationContext();
+                CharSequence text = "User already exists! Please register again or log in!";
+                int duration = Toast.LENGTH_LONG;
 
-        }
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+            else{
+                CharSequence text = "Registration completed :) Please log in";
+                int duration = Toast.LENGTH_LONG;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        }*/
+        /*protected void onPostExecute(int flag) {
+            if(flag == 1){
+                Context context = getApplicationContext();
+                CharSequence text = "User already exists! Please register again or log in!";
+                int duration = Toast.LENGTH_LONG;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        }*/
     }
+
+    private void runToast() {
+        runOnUiThread (new Thread(new Runnable() {
+            public void run() {
+                    try {
+                        Context context = getApplicationContext();
+                        CharSequence text = "User already exists! Please register again or log in!";
+                        int duration = Toast.LENGTH_LONG;
+
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }));
+        }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

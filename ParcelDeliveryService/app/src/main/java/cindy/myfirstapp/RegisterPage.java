@@ -85,10 +85,12 @@ public class RegisterPage extends ActionBarActivity {
             String username = user.getText().toString();
             EditText pass = (EditText)findViewById(R.id.password);
             String password = pass.getText().toString();
+            EditText home = (EditText)findViewById(R.id.home);
+            String location = home.getText().toString();
 
             //SQL commands
-            String insert = "INSERT INTO users VALUES(?, ?)";
-            String check = "SELECT * FROM users WHERE username = '"+username+"' AND password = '"+password+"' ";
+            String insert = "INSERT INTO users VALUES(?, ?, ?)";
+            String check = "SELECT * FROM users WHERE username = '"+username+"' AND password = '"+password+"' AND home = '"+location+"'";
 
 
             try {
@@ -100,6 +102,7 @@ public class RegisterPage extends ActionBarActivity {
 
                 statement_insert.setString(1, username);
                 statement_insert.setString(2, password);
+                statement_insert.setString(3, location);
 
                 ResultSet rs = statement_check.executeQuery(check);
 

@@ -93,6 +93,10 @@
             android:name=".DeliveryActivity"
             android:label="@string/title_activity_delivery" >
         </activity>
+        <activity
+            android:name=".RatingActivity"
+            android:label="@string/title_activity_rating" >
+        </activity>
     </application>
 
 </manifest>

@@ -47,7 +47,7 @@ public class FriendsActivity extends ActionBarActivity {
         friendsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                sendDelivery(view);
+                sendDelivery(view,id);
             }
         });
 
@@ -108,8 +108,10 @@ public class FriendsActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
     // called when the delivery button is clicked
-    public void sendDelivery(View view) {
+    public void sendDelivery(View view, long id) {
         Intent intent = new Intent(this, DeliveryActivity.class);
+        String deliverToFriend = Long.toString(id);
+//        intent.putExtra(EXTRA_MESSAGE, deliverToFriend);
         startActivity(intent);
 
         /*open up google maps application instead of using MapsActivity! */

@@ -41,4 +41,7 @@
     <string name="remove_friend">Remove Friend</string>
     <string name="add_friend">Add Friend</string>
     <string name="prompt_friend">Name of Friend</string>
+    <string name="title_activity_rating">RatingActivity</string>
+
+    <string name="rate">Rate</string>
 </resources>

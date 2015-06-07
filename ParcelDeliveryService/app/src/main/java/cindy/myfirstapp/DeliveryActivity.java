@@ -47,7 +47,8 @@ public class DeliveryActivity extends ActionBarActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, RegisterPage.class); // switch to register view
+                Intent intent = new Intent(context, RatingActivity.class); // switch to register view
+//                String rateThisFriend =
                 startActivity(intent);
             }
         });
@@ -58,7 +59,7 @@ public class DeliveryActivity extends ActionBarActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, RegisterPage.class); // switch to register view
+                Intent intent = new Intent(context, FriendsActivity.class); // switch to register view
                 startActivity(intent);
             }
         });

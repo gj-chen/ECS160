@@ -26,6 +26,7 @@ import java.sql.Statement;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MyActivity extends ActionBarActivity {
@@ -128,18 +129,15 @@ public class MyActivity extends ActionBarActivity {
                 // if selection / login = FALSE, open registration page
 
                 if(rs.next()){
-                    System.out.println("inside check");
-                    //open toast: already registered user -> goes to login page
-                    //Toast.makeText(getApplicationContext(),
-                    //      "Registered User Already Exists", Toast.LENGTH_LONG).show();
+                    runToast();
+
                     Intent intent = new Intent();
                     intent.setClass(getApplicationContext(), DisplayMessageActivity.class);
                     startActivity(intent);
                 }
                 else{
-                    //Toast.makeText(getApplicationContext(),
-                    //      "Registration Successful! Please log in :)", Toast.LENGTH_LONG).show();
-                    System.out.println("inside else!!! wooooo!");
+                    runToast2();
+
                     Intent intent = new Intent();
                     intent.setClass(getApplicationContext(), RegisterPage.class);
                     startActivity(intent);
@@ -159,7 +157,41 @@ public class MyActivity extends ActionBarActivity {
         }
     }
 
+    private void runToast() {
+        runOnUiThread (new Thread(new Runnable() {
+            public void run() {
+                try {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Welcome! :)";
+                    int duration = Toast.LENGTH_LONG;
 
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }));
+    }
+
+    private void runToast2() {
+        runOnUiThread (new Thread(new Runnable() {
+            public void run() {
+                try {
+                    Context context = getApplicationContext();
+                    CharSequence text = "User does not exist. Please register!";
+                    int duration = Toast.LENGTH_LONG;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }));
+    }
 
     public void openSettings() {
         //

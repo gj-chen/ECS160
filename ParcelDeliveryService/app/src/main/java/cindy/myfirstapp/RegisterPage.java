@@ -114,6 +114,7 @@ public class RegisterPage extends ActionBarActivity {
                     startActivity(intent);
                 }
                 else{
+                    runToast2();
                     int insert_db = statement_insert.executeUpdate();
 
                     Intent intent = new Intent();
@@ -131,34 +132,8 @@ public class RegisterPage extends ActionBarActivity {
             }
             return retval;
         }
-        /*protected void onProgressUpdate(Integer integers) {
-            if(integers == 1){
-                Context context = getApplicationContext();
-                CharSequence text = "User already exists! Please register again or log in!";
-                int duration = Toast.LENGTH_LONG;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-            }
-            else{
-                CharSequence text = "Registration completed :) Please log in";
-                int duration = Toast.LENGTH_LONG;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-            }
-        }*/
-        /*protected void onPostExecute(int flag) {
-            if(flag == 1){
-                Context context = getApplicationContext();
-                CharSequence text = "User already exists! Please register again or log in!";
-                int duration = Toast.LENGTH_LONG;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-            }
-        }*/
     }
+
 
     private void runToast() {
         runOnUiThread (new Thread(new Runnable() {
@@ -177,6 +152,24 @@ public class RegisterPage extends ActionBarActivity {
                 }
             }));
         }
+
+    private void runToast2() {
+        runOnUiThread (new Thread(new Runnable() {
+            public void run() {
+                try {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Registration completed :) Please log in";
+                    int duration = Toast.LENGTH_LONG;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }));
+    }
 
 
     @Override

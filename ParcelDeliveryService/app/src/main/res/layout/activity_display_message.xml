@@ -54,5 +54,16 @@
             android:textColor="#d1d1e0"
             android:background="#ffcdf1ff"
             android:onClick="sendMessage"/>
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"/>
+        <TextView
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            />
     </LinearLayout>
 </LinearLayout>

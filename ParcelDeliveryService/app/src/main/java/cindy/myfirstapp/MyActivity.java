@@ -113,6 +113,11 @@ public class MyActivity extends ActionBarActivity {
             EditText pass = (EditText)findViewById(R.id.password);
             String password = pass.getText().toString();
 
+            //Bundle used to store values
+            Bundle bundle = new Bundle();
+            bundle.putString("username", username);
+            bundle.putString("password", password);
+
             //SQL commands
             String check = "SELECT * FROM users WHERE username = '"+username+"' AND password = '"+password+"' ";
 
@@ -133,6 +138,7 @@ public class MyActivity extends ActionBarActivity {
 
                     Intent intent = new Intent();
                     intent.setClass(getApplicationContext(), DisplayMessageActivity.class);
+                    intent.putExtras(bundle);
                     startActivity(intent);
                 }
                 else{

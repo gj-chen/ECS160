@@ -39,8 +39,26 @@ public class DisplayMessageActivity extends ActionBarActivity {
         setContentView(R.layout.activity_display_message);
 
         //retrieve the object
-        ListView knapsackList = (ListView) findViewById(R.id.knapsack_List);
-        System.out.println("knapsackList okay");
+        ListView knapsackList = (ListView)findViewById(R.id.knapsack_List);
+
+        //After add or removal of parcel
+        //getString(parcel) and add into ArrayList
+        //Update ArrayList after every add/remove parcel
+
+        final ArrayList<String> knapsackItems = new ArrayList<String>();
+
+        final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, knapsackItems);
+        knapsackList.setAdapter(listAdapter);
+
+        // callback function when knapsack item is clicked
+        knapsackList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // go to new view with friends list
+                selectItem(view);
+                }
+        });
+
 
         //Add Parcel Button
         Button button;
@@ -49,11 +67,15 @@ public class DisplayMessageActivity extends ActionBarActivity {
             @Override
             public void onClick(View arg0) {
                 new FetchSQL().execute();
+
+                EditText parcel_item = (EditText)findViewById(R.id.parcel);
+                String parcel = parcel_item.getText().toString();
+                knapsackItems.add(parcel);
+                listAdapter.notifyDataSetChanged();
             }
         });
 
         //Remove Parcel Button
-        //Add Parcel Button
         Button button1;
         button1 = (Button)findViewById(R.id.remove_item);
         button1.setOnClickListener(new View.OnClickListener() {
@@ -88,23 +110,16 @@ public class DisplayMessageActivity extends ActionBarActivity {
             bundle = getIntent().getExtras();
             String username = bundle.getString("username");
             String password = bundle.getString("password");
-            System.out.println("after bundle extraction");
 
-            //System.out.println(username);
-            //System.out.println(password);
 
 
             //SQL commands
             String selection = "SELECT username, password FROM users WHERE username = '"+username+"' AND password = '"+password+"'";
             String add_parcel = "INSERT INTO parcels VALUES(?, ?)";
-            //String check = "SELECT * FROM users WHERE username = '"+username+"' AND password = '"+password+"' ";
-            //String add_parcel = "INSERT INTO users(knapsack) VALUES(?)";
-            //String add_parcel = "INSERT INTO users(knapsack) VALUES(?) SELECT * FROM users WHERE username = '"+username+"' AND password = '"+password+"'";
 
 
             EditText parcel_item = (EditText)findViewById(R.id.parcel);
             String parcel = parcel_item.getText().toString();
-            System.out.println("parcel okay");
 
             try {
                 DriverManager.setLoginTimeout(5);
@@ -113,8 +128,6 @@ public class DisplayMessageActivity extends ActionBarActivity {
                 statement_parcelinsert = connection.prepareStatement(add_parcel);
                 Statement statement_check = connection.createStatement();
 
-                System.out.println("connection made");
-
                 statement_parcelinsert.setString(1, String.valueOf(username));
                 statement_parcelinsert.setString(2, parcel);
 
@@ -122,9 +135,7 @@ public class DisplayMessageActivity extends ActionBarActivity {
 
 
                while(rs.next()){
-                    System.out.println("inside if");
                     int insertion = statement_parcelinsert.executeUpdate();
-                    System.out.println("insertion successful");
                     runToast();
                 }
 
@@ -162,9 +173,6 @@ public class DisplayMessageActivity extends ActionBarActivity {
         }));
     }
 
-// ===================================================================
-    //=================================================================
-
     //Remove Parcel
     private class FetchSQL1 extends AsyncTask<Void,Void,String> {
         Context context = getApplicationContext();
@@ -189,26 +197,14 @@ public class DisplayMessageActivity extends ActionBarActivity {
             bundle = getIntent().getExtras();
             String username = bundle.getString("username");
             String password = bundle.getString("password");
-            System.out.println("after bundle extraction");
+
 
             EditText parcel_item = (EditText)findViewById(R.id.parcel);
             String parcel = parcel_item.getText().toString();
-            System.out.println(parcel);
-
-            //System.out.println(username);
-            //System.out.println(password);
-
-            System.out.println("inside removal");
 
 
             //SQL commands
-            //String selection = "SELECT user, parcel FROM parcels WHERE user = '"+username+"' and parcel = '"+parcel+"'";
-            //String selection = "SELECT username, password FROM users WHERE username = '"+username+"' AND password = '"+password+"'";
             String remove_parcel = "DELETE FROM parcels WHERE parcel = '"+parcel+"'";
-            //String check = "SELECT * FROM users WHERE username = '"+username+"' AND password = '"+password+"' ";
-            //String add_parcel = "INSERT INTO users(knapsack) VALUES(?)";
-            //String add_parcel = "INSERT INTO users(knapsack) VALUES(?) SELECT * FROM users WHERE username = '"+username+"' AND password = '"+password+"'";
-
 
             try {
                 DriverManager.setLoginTimeout(5);
@@ -217,23 +213,10 @@ public class DisplayMessageActivity extends ActionBarActivity {
                 statement_parcelremove = connection.prepareStatement(remove_parcel);
                 Statement statement_check = connection.createStatement();
 
-                System.out.println("connection made");
-
-                //statement_parcelremove.setString(1, String.valueOf(username));
-                //statement_parcelremove.setString(2, parcel);
-
-                //ResultSet rs = statement_check.executeQuery(selection);
-
-
-                //while(rs.next()){
-                    System.out.println("inside if");
                     int removal = statement_parcelremove.executeUpdate();
-                    System.out.println("deletion successful");
                     runToast1();
-                //}
 
                 statement_parcelremove.close();
-                //statement_check.close();
                 connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -268,11 +251,6 @@ public class DisplayMessageActivity extends ActionBarActivity {
             }
         }));
     }
-
-
-
-
-
 
 
     public boolean onOptionsItemSelected(MenuItem item) {

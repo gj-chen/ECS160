@@ -229,7 +229,7 @@ public class DisplayMessageActivity extends ActionBarActivity {
                     System.out.println("inside if");
                     int removal = statement_parcelremove.executeUpdate();
                     System.out.println("deletion successful");
-                    runToast();
+                    runToast1();
                 //}
 
                 statement_parcelremove.close();
@@ -249,6 +249,24 @@ public class DisplayMessageActivity extends ActionBarActivity {
 
         }
 
+    }
+
+    private void runToast1() {
+        runOnUiThread (new Thread(new Runnable() {
+            public void run() {
+                try {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Parcel has been removed!";
+                    int duration = Toast.LENGTH_LONG;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }));
     }
 
 

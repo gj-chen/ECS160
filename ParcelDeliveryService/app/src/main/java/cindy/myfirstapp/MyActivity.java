@@ -137,7 +137,7 @@ public class MyActivity extends ActionBarActivity {
                     runToast();
 
                     Intent intent = new Intent();
-                    intent.setClass(getApplicationContext(), DisplayMessageActivity.class);
+                    intent.setClass(MyActivity.this, DisplayMessageActivity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }

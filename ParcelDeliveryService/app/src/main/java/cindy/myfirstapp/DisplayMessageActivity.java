@@ -88,30 +88,27 @@ public class DisplayMessageActivity extends ActionBarActivity {
 
             String url = "jdbc:postgresql://10.0.2.2/postgres?user=postgres&password=05258729";
             Connection connection = null;
+
             PreparedStatement statement_parcelinsert = null;
 
-            System.out.println("connection made");
-            Bundle bundle = getIntent().getExtras();
-            System.out.println("got bundle");
+            //Receiving Bundle
+            Bundle bundle = null;
+            bundle = getIntent().getExtras();
+            String username = bundle.getString("username");
+            String password = bundle.getString("password");
+            System.out.println("after bundle extraction");
 
-            String user = bundle.getString("username");
-            String pass = bundle.getString("password");
-            System.out.println("set bundle");
-
-            TextView username = (TextView)findViewById(R.id.username);
-            TextView password = (TextView)findViewById(R.id.password);
-            System.out.println("before setText");
-
-            username.setText(user);
-            password.setText(pass);
-
-
-            System.out.println("after setText");
+            //System.out.println(username);
+            //System.out.println(password);
 
 
             //SQL commands
-            String check = "SELECT * FROM users WHERE username = '"+username+"' AND password = '"+password+"' ";
-            String add_parcel = "INSERT INTO users(knapsack) VALUES(?)";
+            String selection = "SELECT username, password FROM users WHERE username = '"+username+"' AND password = '"+password+"'";
+            String add_parcel = "INSERT INTO parcels VALUES(?, ?)";
+            //String check = "SELECT * FROM users WHERE username = '"+username+"' AND password = '"+password+"' ";
+            //String add_parcel = "INSERT INTO users(knapsack) VALUES(?)";
+            //String add_parcel = "INSERT INTO users(knapsack) VALUES(?) SELECT * FROM users WHERE username = '"+username+"' AND password = '"+password+"'";
+
 
             EditText parcel_item = (EditText)findViewById(R.id.parcel);
             String parcel = parcel_item.getText().toString();
@@ -123,20 +120,21 @@ public class DisplayMessageActivity extends ActionBarActivity {
 
                 statement_parcelinsert = connection.prepareStatement(add_parcel);
                 Statement statement_check = connection.createStatement();
+
                 System.out.println("connection made");
 
-                statement_parcelinsert.setString(1, parcel);
+                statement_parcelinsert.setString(1, String.valueOf(username));
+                statement_parcelinsert.setString(2, parcel);
 
-                ResultSet rs = statement_check.executeQuery(check);
+                ResultSet rs = statement_check.executeQuery(selection);
 
 
-                while(rs.next()){
+               while(rs.next()){
                     System.out.println("inside if");
                     int insertion = statement_parcelinsert.executeUpdate();
                     System.out.println("insertion successful");
                     runToast();
                 }
-
 
                 statement_parcelinsert.close();
                 statement_check.close();

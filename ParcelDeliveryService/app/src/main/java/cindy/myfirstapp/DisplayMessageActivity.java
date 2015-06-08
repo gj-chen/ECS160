@@ -52,24 +52,16 @@ public class DisplayMessageActivity extends ActionBarActivity {
             }
         });
 
-        //Button button2;
-        //button2 = (Button)findViewById(R.id.remove_item);
-
-        //button2.setOnClickListener(new View.OnClickListener() {
-          //  @Override
-            //public void onClick(View arg0) {
-              //  EditText parcel_item = (EditText)findViewById(R.id.parcel);
-                //String parcel = parcel_item.getText().toString();
-
-                //for(int i = 0; i < knapsackItems.size(); i++) {
-                  //  if(Objects.equals(parcel, knapsackItems.get(i)))
-                    //    knapsackItems.remove(parcel);
-                //}
-               //listAdapter.notifyDataSetChanged();
-                //System.out.println(knapsackItems);
-           // }
-        //});
-
+        //Remove Parcel Button
+        //Add Parcel Button
+        Button button1;
+        button1 = (Button)findViewById(R.id.remove_item);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                new FetchSQL1().execute();
+            }
+        });
     }
 
     //Add Parcel Button
@@ -151,6 +143,7 @@ public class DisplayMessageActivity extends ActionBarActivity {
 
         }
     }
+
     private void runToast() {
         runOnUiThread (new Thread(new Runnable() {
             public void run() {
@@ -168,6 +161,100 @@ public class DisplayMessageActivity extends ActionBarActivity {
             }
         }));
     }
+
+// ===================================================================
+    //=================================================================
+
+    //Remove Parcel
+    private class FetchSQL1 extends AsyncTask<Void,Void,String> {
+        Context context = getApplicationContext();
+
+        @Override
+        protected String doInBackground(Void... params) {
+            String retval = "";
+            try {
+                Class.forName("org.postgresql.Driver");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+                retval = e.toString();
+            }
+
+            String url = "jdbc:postgresql://10.0.2.2/postgres?user=postgres&password=05258729";
+            Connection connection = null;
+
+            PreparedStatement statement_parcelremove = null;
+
+            //Receiving Bundle
+            Bundle bundle = null;
+            bundle = getIntent().getExtras();
+            String username = bundle.getString("username");
+            String password = bundle.getString("password");
+            System.out.println("after bundle extraction");
+
+            EditText parcel_item = (EditText)findViewById(R.id.parcel);
+            String parcel = parcel_item.getText().toString();
+            System.out.println(parcel);
+
+            //System.out.println(username);
+            //System.out.println(password);
+
+            System.out.println("inside removal");
+
+
+            //SQL commands
+            //String selection = "SELECT user, parcel FROM parcels WHERE user = '"+username+"' and parcel = '"+parcel+"'";
+            //String selection = "SELECT username, password FROM users WHERE username = '"+username+"' AND password = '"+password+"'";
+            String remove_parcel = "DELETE FROM parcels WHERE parcel = '"+parcel+"'";
+            //String check = "SELECT * FROM users WHERE username = '"+username+"' AND password = '"+password+"' ";
+            //String add_parcel = "INSERT INTO users(knapsack) VALUES(?)";
+            //String add_parcel = "INSERT INTO users(knapsack) VALUES(?) SELECT * FROM users WHERE username = '"+username+"' AND password = '"+password+"'";
+
+
+            try {
+                DriverManager.setLoginTimeout(5);
+                connection = DriverManager.getConnection(url);
+
+                statement_parcelremove = connection.prepareStatement(remove_parcel);
+                Statement statement_check = connection.createStatement();
+
+                System.out.println("connection made");
+
+                //statement_parcelremove.setString(1, String.valueOf(username));
+                //statement_parcelremove.setString(2, parcel);
+
+                //ResultSet rs = statement_check.executeQuery(selection);
+
+
+                //while(rs.next()){
+                    System.out.println("inside if");
+                    int removal = statement_parcelremove.executeUpdate();
+                    System.out.println("deletion successful");
+                    runToast();
+                //}
+
+                statement_parcelremove.close();
+                //statement_check.close();
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                retval = e.toString();
+                System.out.println(retval);
+            }
+            return retval;
+        }
+
+
+        @Override
+        protected void onPostExecute(String value) {
+
+        }
+
+    }
+
+
+
+
+
 
 
     public boolean onOptionsItemSelected(MenuItem item) {

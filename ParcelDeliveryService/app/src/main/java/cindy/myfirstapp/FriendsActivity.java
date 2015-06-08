@@ -2,6 +2,7 @@ package cindy.myfirstapp;
 
 import android.app.ListActivity;
 import android.app.Notification;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.ActionBar;
@@ -15,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.security.AccessControlContext;
 import java.util.ArrayList;
@@ -34,10 +36,11 @@ public class FriendsActivity extends ActionBarActivity {
         // populate the data
         final ArrayList<String> friends = new ArrayList<String>();
 
-        friends.add("Cindy");
+        /*friends.add("Cindy");
         friends.add("Jason");
         friends.add("Gloglo");
         friends.add("Rogaway Senpai");
+        */
 
         // initialize the adapter
         final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, friends);
@@ -62,6 +65,7 @@ public class FriendsActivity extends ActionBarActivity {
                 friends.add(friend);
                 listAdapter.notifyDataSetChanged();
                 System.out.println(friends);
+                runToast();
             }
         });
 
@@ -71,6 +75,7 @@ public class FriendsActivity extends ActionBarActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
+                runToast1();
                 EditText friend_item = (EditText) findViewById(R.id.friend);
                 String friend = friend_item.getText().toString();
 
@@ -83,6 +88,40 @@ public class FriendsActivity extends ActionBarActivity {
             }
         });
 
+    }
+
+    private void runToast() {
+        runOnUiThread(new Thread(new Runnable() {
+            public void run() {
+                try {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Friend has been added!";
+                    int duration = Toast.LENGTH_LONG;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }));
+    }
+
+    private void runToast1() {
+        runOnUiThread(new Thread(new Runnable() {
+            public void run() {
+                try {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Friend has been removed!";
+                    int duration = Toast.LENGTH_LONG;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }));
     }
 
 

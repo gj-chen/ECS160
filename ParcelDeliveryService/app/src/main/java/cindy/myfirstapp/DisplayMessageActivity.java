@@ -70,6 +70,7 @@ public class DisplayMessageActivity extends ActionBarActivity {
 
                 EditText parcel_item = (EditText)findViewById(R.id.parcel);
                 String parcel = parcel_item.getText().toString();
+
                 knapsackItems.add(parcel);
                 listAdapter.notifyDataSetChanged();
             }
@@ -82,6 +83,15 @@ public class DisplayMessageActivity extends ActionBarActivity {
             @Override
             public void onClick(View arg0) {
                 new FetchSQL1().execute();
+
+                EditText parcel_item = (EditText)findViewById(R.id.parcel);
+                String parcel = parcel_item.getText().toString();
+
+                for(int i = 0; i < knapsackItems.size(); i++) {
+                    if(Objects.equals(parcel, knapsackItems.get(i)))
+                        knapsackItems.remove(parcel);
+                    }
+                listAdapter.notifyDataSetChanged();
             }
         });
     }
@@ -93,9 +103,10 @@ public class DisplayMessageActivity extends ActionBarActivity {
         @Override
         protected String doInBackground(Void... params) {
             String retval = "";
+
             try {
                 Class.forName("org.postgresql.Driver");
-            } catch (ClassNotFoundException e) {
+            } catch (ClassNotFoundException e){
                 e.printStackTrace();
                 retval = e.toString();
             }
@@ -112,14 +123,13 @@ public class DisplayMessageActivity extends ActionBarActivity {
             String password = bundle.getString("password");
 
 
-
             //SQL commands
             String selection = "SELECT username, password FROM users WHERE username = '"+username+"' AND password = '"+password+"'";
             String add_parcel = "INSERT INTO parcels VALUES(?, ?)";
 
-
             EditText parcel_item = (EditText)findViewById(R.id.parcel);
             String parcel = parcel_item.getText().toString();
+
 
             try {
                 DriverManager.setLoginTimeout(5);
@@ -133,9 +143,8 @@ public class DisplayMessageActivity extends ActionBarActivity {
 
                 ResultSet rs = statement_check.executeQuery(selection);
 
-
                while(rs.next()){
-                    int insertion = statement_parcelinsert.executeUpdate();
+                   int insertion = statement_parcelinsert.executeUpdate();
                     runToast();
                 }
 
@@ -147,13 +156,16 @@ public class DisplayMessageActivity extends ActionBarActivity {
                 retval = e.toString();
                 System.out.println(retval);
             }
+
             return retval;
         }
-        @Override
-        protected void onPostExecute(String value) {
 
-        }
     }
+
+
+
+    //==============================================
+    //====================================================
 
     private void runToast() {
         runOnUiThread (new Thread(new Runnable() {
@@ -223,16 +235,18 @@ public class DisplayMessageActivity extends ActionBarActivity {
                 retval = e.toString();
                 System.out.println(retval);
             }
+            retval = parcel;
             return retval;
         }
 
-
         @Override
         protected void onPostExecute(String value) {
-
+            //System.out.println(value);
+            //printKnapsack(value);
         }
 
     }
+
 
     private void runToast1() {
         runOnUiThread (new Thread(new Runnable() {

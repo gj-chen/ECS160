@@ -36,11 +36,11 @@ public class FriendsActivity extends ActionBarActivity {
         // populate the data
         final ArrayList<String> friends = new ArrayList<String>();
 
-        /*friends.add("Cindy");
+        friends.add("Cindy");
         friends.add("Jason");
-        friends.add("Gloglo");
-        friends.add("Rogaway Senpai");
-        */
+        friends.add("Gloria");
+        friends.add("Professor Levitt");
+
 
         // initialize the adapter
         final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, friends);
@@ -65,7 +65,13 @@ public class FriendsActivity extends ActionBarActivity {
                 friends.add(friend);
                 listAdapter.notifyDataSetChanged();
                 System.out.println(friends);
-                runToast();
+
+                Context context = getApplicationContext();
+                CharSequence text = "Friend has been added!";
+                int duration = Toast.LENGTH_LONG;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
             }
         });
 
@@ -75,7 +81,6 @@ public class FriendsActivity extends ActionBarActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                runToast1();
                 EditText friend_item = (EditText) findViewById(R.id.friend);
                 String friend = friend_item.getText().toString();
 
@@ -85,43 +90,16 @@ public class FriendsActivity extends ActionBarActivity {
                 }
                 listAdapter.notifyDataSetChanged();
                 System.out.println(friends);
+
+                Context context = getApplicationContext();
+                CharSequence text = "Friend has been removed!";
+                int duration = Toast.LENGTH_LONG;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
             }
         });
 
-    }
-
-    private void runToast() {
-        runOnUiThread(new Thread(new Runnable() {
-            public void run() {
-                try {
-                    Context context = getApplicationContext();
-                    CharSequence text = "Friend has been added!";
-                    int duration = Toast.LENGTH_LONG;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }));
-    }
-
-    private void runToast1() {
-        runOnUiThread(new Thread(new Runnable() {
-            public void run() {
-                try {
-                    Context context = getApplicationContext();
-                    CharSequence text = "Friend has been removed!";
-                    int duration = Toast.LENGTH_LONG;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }));
     }
 
 

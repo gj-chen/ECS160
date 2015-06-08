@@ -50,6 +50,10 @@ public class DisplayMessageActivity extends ActionBarActivity {
         final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, knapsackItems);
         knapsackList.setAdapter(listAdapter);
 
+        knapsackItems.add("Cookies");
+        knapsackItems.add("Ice cream");
+        knapsackItems.add("Flowers");
+
         // callback function when knapsack item is clicked
         knapsackList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
